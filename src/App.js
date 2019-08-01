@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import LevelTwo from './LevelTwo'
 import './App.css';
 
 class App extends React.Component {
@@ -16,7 +16,7 @@ class App extends React.Component {
       "/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f",
       {
         method: 'GET',
-            headers: {Accept: 'application/json', 'Content-Type': 'application/json',},
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json', },
       }
     )
       .then(res => res.json())
@@ -38,13 +38,20 @@ class App extends React.Component {
             error
           });
         }
+
       );
   }
 
   render() {
-    return (this.state.properties.length > 0 && this.state.properties.map((property, index) => {
-      return <li key={index}>{property.summary}</li>;
-    }));
+    return this.state.properties.length > 0 && <div>
+      <h2>London property listings</h2>
+      <ul>
+        {this.state.properties.map((property, index) => {
+          return <li key={index}>{property.summary}</li>;
+        })}
+      </ul>
+      <LevelTwo />
+    </div>
   }
 }
 
