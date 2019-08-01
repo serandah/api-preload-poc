@@ -27,5 +27,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://cy30l4lai7.execute-api.eu-west-2.amazonaws.com/api/v1"
 }
