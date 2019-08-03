@@ -1,4 +1,5 @@
 import React from 'react';
+import ApiPreload from 'api-preload'
 import LevelTwo from './LevelTwo'
 import './App.css';
 
@@ -6,6 +7,12 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    const preload = new ApiPreload([
+      '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f',
+      '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1',
+      '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1&minBedrooms=2&maxBedrooms=2'
+    ])
+    preload.load()
     // Don't call this.setState() here!
     this.state = { properties: [], isLoaded: false };
     //this.handleClick = this.handleClick.bind(this);
@@ -16,7 +23,7 @@ class App extends React.Component {
       "/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f",
       {
         method: 'GET',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json', },
+        headers: { 'Content-Type': 'application/json' },
       }
     )
       .then(res => res.json())
