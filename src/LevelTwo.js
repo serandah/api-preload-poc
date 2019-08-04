@@ -16,8 +16,7 @@ class LevelTwo extends React.Component {
         fetch(
             "/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1",
             {
-                method: 'GET',
-                headers: { Accept: 'application/json', 'Content-Type': 'application/json', },
+                method: 'GET'
             }
         )
             .then(res => res.json())

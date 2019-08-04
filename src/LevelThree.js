@@ -15,8 +15,7 @@ class LevelThree extends React.Component {
         fetch(
             "/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1&minBedrooms=2&maxBedrooms=2",
             {
-                method: 'GET',
-                headers: { Accept: 'application/json', 'Content-Type': 'application/json', },
+                method: 'GET'
             }
         )
             .then(res => res.json())
