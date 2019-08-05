@@ -1,17 +1,14 @@
 import React from 'react';
 import ApiPreload from 'api-preload'
 import Properties from './Properties'
+import hrefs from './hrefs'
 import './App.css';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    const preload = new ApiPreload([
-      '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f',
-      '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1',
-      '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1&minBedrooms=2&maxBedrooms=2'
-    ])
+    const preload = new ApiPreload(hrefs)
     preload.load()
     this.state = { properties: [], isLoaded: false };
   }
