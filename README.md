@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# API Preload POC
 
-## Available Scripts
+Minimal POC to preload essential data to increase page load speeds.
 
-In the project directory, you can run:
+## Problem
 
-### `npm start`
+When nested components form the landing page of an application, if some of them relay on data from API endpoints, the user has to wait till each API call to be completed untill the full page becomes visible.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Peoposed solution
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Use browser's preload capabilities to load all the essential data requred to render the landing page.
+**Note: This solution leverages the `rel="preload"` as described in [W3C specification](https://w3c.github.io/preload/)**
 
-### `npm test`
+## Local setup
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Clone project
 
-### `npm run build`
+`git clone https://github.com/serandah/api-preload-poc.git`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Install dependencies
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+`cd api-preload-poc && npm install`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Run the project
 
-### `npm run eject`
+`npm start`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Testing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Preloaded
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Open chrome developer tool pane
+* Switch to Network tab
+* Refresh the browser
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Note how 3 api calls are made concurrently
 
-## Learn More
+### Non Preloaded
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Open `App.js` and comment line 12 (`preload.load()`)
+* Follow the steps under **Preloaded** above
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Note how 3 api calls are made one after the other, in cascading style
 
-### Code Splitting
+## Next steps
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* Browser testing / fixes
+* Improve this POC
+* Convert to a Node module
