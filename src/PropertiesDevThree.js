@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
+import './Properties.css'
 
-class Properties extends React.Component {
+class PropertiesDevThree extends React.Component {
 
     constructor(props) {
         super(props);
@@ -37,7 +38,7 @@ class Properties extends React.Component {
             const end = this.props.numItems > numItems ? numItems : this.props.numItems
             const properties = this.state.properties.slice(0,end)
         
-            return <div>
+            return <div className='properties'>
                 <h3>{this.props.title}</h3>
                 <ul>
                     {properties.map((property, index) => {
@@ -48,11 +49,11 @@ class Properties extends React.Component {
             </div>
         }
         
-        return <div>
+        return <div className='properties'>
         <h3>{this.props.title}</h3>
         <p>Loading...</p>
         </div>
     }
 }
 
-export default Properties;
+export default PropertiesDevThree;

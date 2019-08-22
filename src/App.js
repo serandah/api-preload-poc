@@ -1,6 +1,8 @@
 import React from 'react';
 import ApiPreload from 'api-preload'
-import Properties from './Properties'
+import PropertiesDevOne from './PropertiesDevOne'
+import PropertiesDevTwo from './PropertiesDevTwo'
+import PropertiesDevThree from './PropertiesDevThree'
 import hrefs from './hrefs'
 import './App.css';
 
@@ -14,23 +16,23 @@ class App extends React.Component {
   }
 
   render() {
-    return <Properties
-      title={'London property listings'}
+    return <PropertiesDevOne
+      title={'London property listings (Developer one)'}
       fetch={{ url: '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f', options: {} }}
       numItems={5}
     >
-      <Properties
-        title={'From Yesterday'}
+      <PropertiesDevTwo
+        title={'From Yesterday (Developer two)'}
         fetch={{ url: '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1', options: {} }}
         numItems={3}
       >
-        <Properties
-          title={'With two bedrooms'}
+        <PropertiesDevThree
+          title={'With two bedrooms (Developer three)'}
           fetch={{ url: '/for-sale/london/?key=82db11669fa84f4ead487f77152dd51f&maxDaysSinceAdded=1&minBedrooms=2&maxBedrooms=2', options: {} }}
           numItems={3}
         />
-      </Properties>
-    </Properties>
+      </PropertiesDevTwo>
+    </PropertiesDevOne>
   }
 }
 
