@@ -1,5 +1,6 @@
 import React from 'react'
 import './Properties.css'
+import $ from 'jquery'
 
 class PropertiesDevThree extends React.Component {
 
@@ -9,35 +10,28 @@ class PropertiesDevThree extends React.Component {
     }
 
     componentDidMount() {
-        fetch(
-            this.props.fetch.url, {
-                ...this.props.fetch.options
-            }
-        )
-            .then(res => res.json())
-            .then(
-                result => {
-                    this.setState({
-                        isLoaded: true,
-                        properties: result.properties
-                    });
-                },
-                error => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
 
-            );
+        $.ajax(this.props.fetch.url)
+            .done(result => {
+                this.setState({
+                    isLoaded: true,
+                    properties: result.properties
+                });
+            })
+            .fail(error => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+            })
     }
 
     render() {
         const numItems = this.state.properties.length
         if (numItems) {
             const end = this.props.numItems > numItems ? numItems : this.props.numItems
-            const properties = this.state.properties.slice(0,end)
-        
+            const properties = this.state.properties.slice(0, end)
+
             return <div className='properties'>
                 <h3>{this.props.title}</h3>
                 <ul>
@@ -48,10 +42,10 @@ class PropertiesDevThree extends React.Component {
                 {this.props.children}
             </div>
         }
-        
+
         return <div className='properties'>
-        <h3>{this.props.title}</h3>
-        <p>Loading...</p>
+            <h3>{this.props.title}</h3>
+            <p>Loading...</p>
         </div>
     }
 }

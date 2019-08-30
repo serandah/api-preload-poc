@@ -1,5 +1,7 @@
 import React from 'react'
 import './Properties.css'
+import axios from 'axios';
+
 
 class PropertiesDevTwo extends React.Component {
 
@@ -9,35 +11,27 @@ class PropertiesDevTwo extends React.Component {
     }
 
     componentDidMount() {
-        fetch(
-            this.props.fetch.url, {
-                ...this.props.fetch.options
-            }
-        )
-            .then(res => res.json())
-            .then(
-                result => {
-                    this.setState({
-                        isLoaded: true,
-                        properties: result.properties
-                    });
-                },
-                error => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
 
-            );
+        axios.get(this.props.fetch.url)
+            .then(result => {
+                this.setState({
+                    isLoaded: true,
+                    properties: result.data.properties
+                })
+            }).catch(error => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                })
+            })
     }
 
     render() {
         const numItems = this.state.properties.length
         if (numItems) {
             const end = this.props.numItems > numItems ? numItems : this.props.numItems
-            const properties = this.state.properties.slice(0,end)
-        
+            const properties = this.state.properties.slice(0, end)
+
             return <div className='properties'>
                 <h3>{this.props.title}</h3>
                 <ul>
@@ -48,10 +42,10 @@ class PropertiesDevTwo extends React.Component {
                 {this.props.children}
             </div>
         }
-        
+
         return <div className='properties'>
-        <h3>{this.props.title}</h3>
-        <p>Loading...</p>
+            <h3>{this.props.title}</h3>
+            <p>Loading...</p>
         </div>
     }
 }
