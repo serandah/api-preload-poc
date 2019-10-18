@@ -8,8 +8,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    const preload = new ApiPreload(hrefs)
-    preload.load()
+    const preload = ApiPreload.preloadData(hrefs);
     this.state = { properties: [], isLoaded: false };
   }
 

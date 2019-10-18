@@ -1,4 +1,5 @@
 import React from 'react';
+import ApiPreload from 'api-preload';
 
 class Properties extends React.Component {
 
@@ -8,10 +9,10 @@ class Properties extends React.Component {
     }
 
     componentDidMount() {
-        fetch(
+        ApiPreload.fetch(
             this.props.fetch.url, {
-                ...this.props.fetch.options
-            }
+            ...this.props.fetch.options
+        }
         )
             .then(res => res.json())
             .then(
@@ -33,24 +34,22 @@ class Properties extends React.Component {
 
     render() {
         const numItems = this.state.properties.length
-        if (numItems) {
-            const end = this.props.numItems > numItems ? numItems : this.props.numItems
-            const properties = this.state.properties.slice(0,end)
-        
-            return <div>
-                <h3>{this.props.title}</h3>
-                <ul>
-                    {properties.map((property, index) => {
-                        return <li key={index}>{property.summary}</li>;
-                    })}
-                </ul>
-                {this.props.children}
-            </div>
-        }
-        
+        const end = this.props.numItems > numItems ? numItems : this.props.numItems
+        const properties = this.state.properties.slice(0, end)
+
         return <div>
-        <h3>{this.props.title}</h3>
-        <p>Loading...</p>
+            <h3>{this.props.title}</h3>
+            <ul>
+                {properties.map((property, index) => {
+                    return <li key={index}>{property.summary}</li>;
+                })}
+            </ul>
+            {this.props.children}
+        </div>
+
+        return <div>
+            <h3>{this.props.title}</h3>
+            <p>Loading...</p>
         </div>
     }
 }
