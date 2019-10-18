@@ -1,23 +1,24 @@
+var ApiPreload = (function (hrefs) {
 
-class ApiPreload {
+    var preloadData = {};
+    var hOP = preloadData.hasOwnProperty;
 
-    constructor(hrefs = []) {
-        this.hrefs = hrefs
-        this.elHead = document.getElementsByTagName('head')[0];
-    }
+    return {
+        preloadData: function (hrefs) {
+            hrefs.forEach(href => {
+                if (!hOP.call(preloadData, href)) {
+                    preloadData[href] = window.fetch(href);
+                }
+            })
+        },
+        fetch: function (href, options) {
+            if (!hOP.call(preloadData, href)) {
+                throw new Error(href + ' not registered with ApiPreload!');
+            }
+            return preloadData[href];
+        }
+    };
 
-    load() {
-        this.hrefs.forEach(href => {
-            const elLink = document.createElement('link')
-            elLink.rel = 'preload'
-            elLink.as = 'fetch'
-            elLink.href = href
-            //elLink.type = 'application/json'
-            elLink.setAttribute('crossorigin','anonymous')
-            this.elHead.appendChild(elLink)
-        })
-    }
-
-}
+})();
 
 export default ApiPreload

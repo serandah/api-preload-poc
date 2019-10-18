@@ -6,10 +6,13 @@ Minimal POC to preload essential data to increase page load speeds.
 
 When nested components form the landing page of an application, if some of them relay on data from API endpoints, the user has to wait till each API call to be completed untill the full page becomes visible.
 
-## Peoposed solution
+## Proposed solution
 
+1) browser's preload capabilities: Refer file local_modules/api-preload/ApiPreload.js
 Use browser's preload capabilities to load all the essential data requred to render the landing page.
 **Note: This solution leverages the `rel="preload"` as described in [W3C specification](https://w3c.github.io/preload/)**
+2) Promises: Refer file local_modules/api-preload/index.js
+Use Promises in Pub-Sub way to pre-fetch data asynchronously and render page instantaneously by returning promise data when component needs to be loaded. This is supported on all modern browsers same as promises.
 
 ## Local setup
 
